@@ -27,6 +27,8 @@ For Day 4, Noble Advisor fills first (49 slots), then overflow players go to Chi
 
 ### The algorithm
 
+> For a deeper walkthrough of the matching model, scoring, and edge cases, see [docs/algorithm.md](docs/algorithm.md).
+
 1. **Select** the top 49 players by speedups (contribution score)
 2. **Assign** them constrained-first (fewest available slots goes first)
 3. **Bump/swap** -- if a top-49 player couldn't fit, find the lowest-value assigned player in one of their slots and relocate or displace them
@@ -96,4 +98,4 @@ Day Sheets (1, 2, 4)        Schedule Sheet
 
 ## License
 
-MIT
+[MIT](LICENSE)
