@@ -2,6 +2,28 @@
 
 Automates the scheduling of 80-100 players into 49 half-hour time slots across 3 event days, prioritizing players with the most resources while fitting as many people as possible. Built in Google Apps Script, runs entirely inside Google Sheets.
 
+## Screenshots
+
+### The generated schedule
+
+The final output: every 30-minute slot assigned across Day 1 (Construction), Day 2 (Research), and Day 4's dual tracks (Noble Advisor + Chief Minister), rendered side by side.
+
+![Final generated schedule across all days](docs/images/final-schedule.png)
+
+### Day 4 dual-track detail
+
+Day 4 runs two parallel tracks. Noble Advisor fills first; overflow players go to Chief Minister, shown side by side with open slots highlighted in green.
+
+![Day 4 Noble Advisor and Chief Minister detail view](docs/images/day4-dual-track.png)
+
+### Unassigned players
+
+Anyone who couldn't be placed is listed separately with the reason — either all their preferred/alternate slots were taken, or they fell below the speedup cutoff for the slots they were available for.
+
+![Unassigned players listed with reasons](docs/images/unassigned-players.png)
+
+> Player IDs in these screenshots are intentionally blurred.
+
 ## Background
 
 I coordinate a competitive gaming alliance (~200 members) that runs a recurring event every 4 weeks. Each event has 3 days where players need to be assigned individual 30-minute appointment windows across a 24-hour UTC cycle. Players submit a Google Form with their preferred time and alternates, then I build the schedule.
