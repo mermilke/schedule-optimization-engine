@@ -108,6 +108,17 @@ Day Sheets (1, 2, 4)        Schedule Sheet
 - `LockService` for concurrent submission safety
 - `PropertiesService` for cycle tracking
 
+## Limitations & future work
+
+Things I'm aware of and would improve given time:
+
+- **The optimizer is a heuristic, not provably optimal.** Constrained-first assignment plus a bump/swap pass handles the real cases well, but it's not a true maximum-weight bipartite matching -- there are contrived inputs where it leaves a slightly better arrangement on the table. A Hungarian-algorithm pass would close that gap.
+- **Player Name is the identity key, not Player ID.** Merging on name means a rename or typo creates a duplicate record. Keying on the (stable) Player ID would be more robust.
+- **Google Apps Script quotas.** Everything runs inside the 6-minute execution limit and trigger quotas. Current rosters (~80-100) are comfortably within bounds, but a much larger event could approach them.
+- **Setup is manual.** Tables, headers, and triggers are created by hand. A one-click installer (or `clasp`-based deploy) would remove the footguns around exact header names.
+- **Hardcoded structure.** Three days and the Day 4 dual-track are baked into `CONFIG`. Making day/track count fully data-driven would generalize it to other event formats.
+- **No automated tests.** The assignment core is verified by hand against real signups. Unit tests around the matching logic would make refactors safer.
+
 ## Setup
 
 1. Open your Google Sheet > Extensions > Apps Script
@@ -117,6 +128,8 @@ Day Sheets (1, 2, 4)        Schedule Sheet
 5. Add a trigger: Triggers > + Add Trigger > `onFormSubmit` > From spreadsheet > On form submit
 6. Create tables on Day sheets with headers: Player Name, Override, Assigned Start Time, End Time, Timestamp, Player ID, Alliance, Speedups, Preferred Time, Additional Availability, Comments
 7. Day 4: create a second table in columns M-W with the same headers for Chief Minister
+
+The script reads the form responses and sheets **by exact column header name** -- see [docs/form-fields.md](docs/form-fields.md) for the full field reference and accepted value formats.
 
 ## License
 
