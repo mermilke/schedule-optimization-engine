@@ -47,7 +47,7 @@ After the batch run, I can type overrides in column B on the Day sheets:
 - `CHIEF` / `NOBLE` -- move between the two Day 4 tracks
 - A time like `09:45` -- lock to a specific slot
 
-Overrides persist when I re-run. SKIP'd players show in the unassigned section instead of disappearing.
+Overrides persist when I re-run. SKIPed players show in the unassigned section instead of disappearing.
 
 ### Cycle management
 

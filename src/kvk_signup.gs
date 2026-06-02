@@ -344,7 +344,7 @@ function readCMOverrides(sheetName) {
 //      player in one of their available slots
 //   4) Backfill leftover open slots with remaining players
 //
-// SKIP'd players bypass all of this and go straight to unassigned.
+// SKIPed players bypass all of this and go straight to unassigned.
 
 function assignToTrack(players, maxSlots, reserved, reservedFor) {
   reserved = reserved || new Set();
