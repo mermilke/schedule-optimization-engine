@@ -88,6 +88,19 @@ Anyone who couldn't be placed is listed separately with the reason — either al
 
 ## Architecture
 
+```mermaid
+flowchart TD
+    Form["Google Form"] -->|"onFormSubmit trigger"| Responses["Form Responses (sheet)"]
+    Responses -->|"readFormData: dedup + merge"| Players["Player objects (in memory)"]
+    Players -->|"assignToTrack: multi-phase optimizer"| Assign["Assignments"]
+    Assign -->|"writeTrack / writeCM"| Day["Day Sheets (1, 2, 4)"]
+    Assign -->|"writeSchedule / updateScheduleSlot"| Schedule["Schedule sheet"]
+    Day -.->|"Override column B — persists across runs"| Players
+```
+
+<details>
+<summary>Plain-text version</summary>
+
 ```
 Google Form
     |  onFormSubmit trigger
@@ -100,6 +113,8 @@ Day Sheets (1, 2, 4)        Schedule Sheet
     |  writeCM()                 |  updateScheduleSlot()
     '-- Override col (B) --- persists across runs
 ```
+
+</details>
 
 ## Tech
 
