@@ -269,42 +269,12 @@ function readFormData() {
 
 
 // override reading
-// Reads column B from Day sheets. Handles typed columns that turn "09:45" into Date objects.
+// Reads the Override column from a Day sheet into a name -> override map.
+// Handles typed columns that turn "09:45" into Date objects. Pass `cols` to select
+// the Noble Advisor block (CONFIG.COL, default) or Chief Minister block (CONFIG.CM_COL).
 
-function readOverrides(sheetName) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(sheetName);
-  var overrides = new Map();
-  if (!sheet) return overrides;
-
-  var C = CONFIG.COL;
-  var last = sheet.getLastRow();
-  if (last < 2) return overrides;
-
-  for (var r = 2; r <= last; r++) {
-    var name = String(sheet.getRange(r, C.name).getValue() || '').trim();
-    var raw = sheet.getRange(r, C.override).getValue();
-    if (!name || !raw) continue;
-    if (name.indexOf('──') === 0 || name.indexOf('⚠') === 0 || name === 'Player Name') continue;
-
-    var str = String(raw).trim().toUpperCase();
-    if (str === 'SKIP' || str === 'ASSIGN' || str === 'CHIEF' || str === 'NOBLE') {
-      overrides.set(name, str);
-    } else {
-      var t = normalizeTime(raw);
-      if (t && ALL_SLOTS.indexOf(t) >= 0) {
-        overrides.set(name, t);
-      } else {
-        overrides.set(name, String(raw).trim());
-      }
-    }
-  }
-  return overrides;
-}
-
-// same thing but for chief minister columns (N = col 14)
-// TODO: could probably merge this with readOverrides and just pass the column numbers
-function readCMOverrides(sheetName) {
+function readOverrides(sheetName, cols) {
+  cols = cols || CONFIG.COL;
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
   var overrides = new Map();
@@ -314,8 +284,8 @@ function readCMOverrides(sheetName) {
   if (last < 2) return overrides;
 
   for (var r = 2; r <= last; r++) {
-    var name = String(sheet.getRange(r, CONFIG.CM_COL.name).getValue() || '').trim();
-    var raw = sheet.getRange(r, CONFIG.CM_COL.override).getValue();
+    var name = String(sheet.getRange(r, cols.name).getValue() || '').trim();
+    var raw = sheet.getRange(r, cols.override).getValue();
     if (!name || !raw) continue;
     if (name.indexOf('──') === 0 || name.indexOf('⚠') === 0 || name === 'Player Name') continue;
 
@@ -524,7 +494,7 @@ function batchAssignDay(dayConfig, allPlayers, crossover) {
   var overrides = readOverrides(dayConfig.sheetName);
   var cmOverrides = new Map();
   if (dayConfig.tracks === 2) {
-    cmOverrides = readCMOverrides(dayConfig.sheetName);
+    cmOverrides = readOverrides(dayConfig.sheetName, CONFIG.CM_COL);
   }
 
   var eligible = allPlayers
@@ -1022,8 +992,8 @@ function updateScheduleSlot(dayConfig, slot, name, alliance, playerId) {
   var sched = ss.getSheetByName(CONFIG.SCHEDULE_SHEET);
   if (!sched) return;
 
-  var colMap = { day1: 2, day2: 7, day4: 12 };
-  var col = colMap[dayConfig.key];
+  var dayCols = { day1: 2, day2: 7, day4: 12 };
+  var col = dayCols[dayConfig.key];
   if (!col) return;
 
   var idx = ALL_SLOTS.indexOf(slot);
@@ -1217,7 +1187,6 @@ function writeSchedule() {
 // reassign all
 
 function reassignAll() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi();
 
   var ok = ui.alert('Reassign All Players',
@@ -1586,7 +1555,7 @@ function showOverrideHelp() {
     '  09:45     Lock to a specific time slot\n' +
     '  (blank)   Normal algorithm\n\n' +
     'Overrides persist when you re-run Reassign All.\n' +
-    'SKIP\'d players appear at the bottom of the sheet.\n\n' +
+    'SKIPed players appear at the bottom of the sheet.\n\n' +
     'After making changes, run Reassign All (or Reassign Day X) to apply.',
     SpreadsheetApp.getUi().ButtonSet.OK);
 }

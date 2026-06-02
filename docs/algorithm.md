@@ -2,15 +2,15 @@
 
 ## The problem
 
-~80 players sign up for 49 slots. Each player picks a preferred time and some alternates. Each player has a "speedups" number (their contribution value -- higher is better). I want the 49 players with the most speedups to get slots, and I want as many of them as possible to actually fit.
+On a given day, ~80 players sign up for that day's 49 slots. Each player picks a preferred time and some alternates. Each player has a "speedups" number (their contribution value — higher is better). I want the 49 players with the most speedups to get slots, and I want as many of them as possible to actually fit.
 
-This is basically a maximum weight bipartite matching problem -- players on one side, slots on the other, edges where a player is available, and you want to maximize total weight (speedups) of the matched set. But with a twist: I care about maximizing the *count* of top-49 players first, then maximizing their speedups second.
+This is basically a maximum weight bipartite matching problem — players on one side, slots on the other, edges where a player is available, and you want to maximize total weight (speedups) of the matched set. But with a twist: I care about maximizing the *count* of top-49 players first, then maximizing their speedups second.
 
 The catch: some players are flexible (30+ available times) and some are constrained (2-3 times). If you just assign the highest-speedup player first, they might grab a slot that was the only option for someone else.
 
 ## Why simple greedy doesn't work
 
-Example -- if you assign highest speedups first:
+Example — if you assign highest speedups first:
 
 ```
 Player 1  (150 speedups, 33 available slots)   -> gets 02:45
@@ -50,7 +50,7 @@ Each player tries their preferred slot, then alternates sorted by proximity (cir
 
 If any of the top 49 still couldn't fit (all their times were taken by other top players), look for the lowest-speedup assigned player sitting in one of their available slots.
 
-Try to relocate that player to an open alternate first -- if that works, nobody loses a spot. If they can't relocate, bump them out entirely.
+Try to relocate that player to an open alternate first — if that works, nobody loses a spot. If they can't relocate, bump them out entirely.
 
 ### 4. Backfill
 
@@ -62,10 +62,10 @@ Day 4 has Noble Advisor (primary, 49 slots) and Chief Minister (overflow, 49 mor
 
 Players can be forced to a specific track with `CHIEF` or `NOBLE` in the override column.
 
-## The crossover thing
+## Crossover handling
 
-Day 1's last slot (23:45) and Day 2's first slot (00:00) need to be the same person -- they're covering the midnight boundary. After Day 1 is assigned, the script checks who got 23:45, verifies they signed up for Day 2, and reserves the 00:00 slot for them before running Day 2's algorithm.
+Day 1's last slot (23:45) and Day 2's first slot (00:00) need to be the same person — they're covering the midnight boundary. After Day 1 is assigned, the script checks who got 23:45, verifies they signed up for Day 2, and reserves the 00:00 slot for them before running Day 2's algorithm.
 
 ## Performance
 
-It's 49 slots and ~80 players. The whole thing runs in under a second. The real bottleneck is Google Sheets API calls (reading/writing cells), not the algorithm.
+It's 49 slots and ~80 players per day. The whole thing runs in under a second. The real bottleneck is Google Sheets API calls (reading/writing cells), not the algorithm.
