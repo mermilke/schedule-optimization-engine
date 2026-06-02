@@ -2,7 +2,7 @@
 
 ## The problem
 
-Each cycle brings hundreds of sign-ups across the event, more than the slots can hold -- there are 49 slots per track on each day. Each player picks a preferred time and some alternates, plus a "speedups" number (their contribution value -- higher is better). For each track I want the 49 players with the most speedups to get slots, and as many of them as possible to actually fit.
+Each cycle brings hundreds of sign-ups across the event, more than the slots can hold -- there are 49 slots per track on each scheduled day (the event runs a week, but only Days 1, 2, and 4 use speedups, so those are the days that get scheduled). Each player picks a preferred time and some alternates, plus a "speedups" number (their contribution value -- higher is better). For each track I want the 49 players with the most speedups to get slots, and as many of them as possible to actually fit.
 
 This is basically a maximum weight bipartite matching problem -- players on one side, slots on the other, edges where a player is available, and you want to maximize total weight (speedups) of the matched set. But with a twist: I care about maximizing the *count* of top-49 players first, then maximizing their speedups second.
 
