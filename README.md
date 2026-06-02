@@ -9,6 +9,8 @@ I help run a competitive mobile-game kingdom of ~500 players (my own alliance is
 The old process was painful:
 - Hundreds of form entries to sort through by hand (each player signs up for up to 3 days)
 - Took around 10 hours every cycle
+- Placement was effectively first-come-first-serve -- I dropped each submission into the next open time in the order it arrived, so contribution (speedups) was never factored in
+- A high-speedup player who signed up late ended up with leftover slots, and any last-minute change meant manually reshuffling everyone around them
 - Players with lots of availability would grab the one slot that was another player's only option, locking them out
 - Duplicate submissions and partial changes were a mess
 - Day 4 has an overflow track (two positions instead of one) that was managed in a separate sheet
