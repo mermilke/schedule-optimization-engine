@@ -1,14 +1,14 @@
 # Schedule Optimization Engine
 
-Automates event scheduling for a ~500-player game kingdom. Players sign up through a Google Form, and the script fits as many of them as possible into 49 half-hour slots per track across 3 event days -- prioritizing the highest-contribution players when more sign up than there are slots. Built in Google Apps Script, runs entirely inside Google Sheets.
+A constraint-based scheduling engine that fits hundreds of Google Form sign-ups into a limited set of half-hour appointment slots across multiple days -- prioritizing entries by a weighted score when demand exceeds capacity. Built in Google Apps Script, runs entirely inside Google Sheets.
 
 ## Background
 
 I help run a competitive mobile-game kingdom of ~500 players (my own alliance is about 100 of them) that holds a recurring event every 4 weeks. Each event spans 3 days, and everyone who signs up needs an individual 30-minute appointment window across a 24-hour UTC cycle. Players submit a Google Form with their preferred time and alternates, and I build the schedule from whoever responds.
 
 The old process was painful:
-- 80+ form submissions to sort through by hand
-- Took 2-3 hours every cycle
+- Hundreds of form entries to sort through by hand (each player signs up for up to 3 days)
+- Took around 10 hours every cycle
 - Players with lots of availability would grab the one slot that was another player's only option, locking them out
 - Duplicate submissions and partial changes were a mess
 - Day 4 has an overflow track (two positions instead of one) that was managed in a separate sheet
