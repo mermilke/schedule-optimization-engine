@@ -4,7 +4,7 @@ A constraint-based scheduling engine that fits hundreds of Google Form sign-ups 
 
 ## Background
 
-I help run a competitive mobile-game kingdom of ~500 players (my own alliance is about 100 of them) that holds a recurring event every 4 weeks. Each event spans 3 days, and everyone who signs up needs an individual 30-minute appointment window across a 24-hour UTC cycle. Players submit a Google Form with their preferred time and alternates, and I build the schedule from whoever responds.
+I help run a competitive mobile-game kingdom of ~500 players that holds a recurring event every 4 weeks. Each event spans 3 days, and everyone who signs up needs an individual 30-minute appointment window across a 24-hour UTC cycle. Players submit a Google Form with their preferred time and alternates, and I build the schedule from whoever responds.
 
 The old process was painful:
 - Hundreds of form entries to sort through by hand (each player signs up for up to 3 days)
