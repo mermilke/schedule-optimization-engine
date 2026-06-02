@@ -10,7 +10,7 @@ The script reads the Google Form's response sheet **by column header name** (see
 |---|---|---|
 | `Timestamp` | auto | Added by Google Forms. Used to track latest submission. |
 | `Player Name` | Short answer | **Primary key.** Submissions are merged by this exact string, so it must be consistent across re-submissions (a rename/typo creates a separate record). |
-| `Player ID` | Short answer | In-game numeric ID. Stored and displayed, but *not* used as the merge key. |
+| `Player ID` | Short answer | The player's in-game ID (usually numeric). Stored and displayed, but *not* used as the merge key. |
 | `Alliance` | Short answer | Alliance tag (e.g. `PRO`, `BR4`). |
 
 ### Per day (repeated for Day 1, Day 2, Day 4)

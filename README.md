@@ -25,7 +25,7 @@ Players fill out a Google Form picking their preferred time and alternates for e
 
 **Batch (Reassign All):** when signups close, I run the full optimizer. It reads all submissions, picks the top 49 by contribution score, and assigns them using a constrained-first approach — players with fewer available times get placed first so they don't get locked out by flexible players. Then a bump/swap pass lets high-value unplaced players displace lower-value ones. Leftover slots get backfilled.
 
-For Day 4, Noble Advisor fills first (49 slots), then overflow players go to Chief Minister (another 49 slots), rendered side-by-side on the same sheet.
+For Day 4, Noble Advisor fills first (49 slots), then overflow players go to Chief Minister (another 49 slots), rendered side by side on the same sheet.
 
 ### The algorithm
 
