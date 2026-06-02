@@ -10,15 +10,15 @@ The catch: some players are flexible (30+ available times) and some are constrai
 
 ## Why simple greedy doesn't work
 
-If you assign highest speedups first:
+Example -- if you assign highest speedups first:
 
 ```
-Ekips  (150 speedups, 33 available slots)  -> gets 02:45
-L_Biz  (136 speedups)                      -> gets 01:15
-Wheelies (52 speedups, only 01:15 or 02:45) -> both taken, unassigned
+Player 1  (150 speedups, 33 available slots)   -> gets 02:45
+Player 2  (136 speedups)                        -> gets 01:15
+Player 3  (52 speedups, only 01:15 or 02:45)    -> both taken, unassigned
 ```
 
-Ekips had 32 other options. Wheelies had 2. Bad outcome.
+Player 1 had 32 other options. Player 3 had 2. Bad outcome.
 
 ## What I do instead
 
@@ -44,7 +44,7 @@ var constrained = selected.slice().sort(function(a, b) {
 });
 ```
 
-Each player tries their preferred slot, then alternates sorted by proximity (circular distance for midnight wrap). Now Wheelies gets 02:45 because they only had 2 options, and Ekips gets 13:45 from their pile of 33.
+Each player tries their preferred slot, then alternates sorted by proximity (circular distance for midnight wrap). Now Player 3 gets 02:45 because they only had 2 options, and Player 1 gets 13:45 from their pile of 33.
 
 ### 3. Bump/swap
 

@@ -36,7 +36,7 @@ For Day 4, Noble Advisor fills first (49 slots), then overflow players go to Chi
 3. **Bump/swap** -- if a top-49 player couldn't fit, find the lowest-value assigned player in one of their slots and relocate or displace them
 4. **Backfill** remaining open slots with everyone else
 
-This solved the main problem: Ekips (150 speedups, 33 available slots) used to grab the 02:45 slot, which was one of only 2 options for Wheelies (52 speedups). Now Wheelies gets placed first because they're more constrained, and Ekips goes into one of their 32 other options.
+**Example.** Say Player 1 (150 speedups, 33 available slots) used to grab the 02:45 slot, which was one of only 2 options for Player 2 (52 speedups). With constrained-first assignment, Player 2 is placed first because they have fewer options, and Player 1 goes into one of their 32 other slots.
 
 ### Overrides
 
