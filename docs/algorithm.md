@@ -2,7 +2,7 @@
 
 ## The problem
 
-On a given day, ~80 players sign up for that day's 49 slots. Each player picks a preferred time and some alternates. Each player has a "speedups" number (their contribution value — higher is better). I want the 49 players with the most speedups to get slots, and I want as many of them as possible to actually fit.
+Each cycle brings hundreds of sign-ups across the event, more than the slots can hold — there are 49 slots per track on each day. Each player picks a preferred time and some alternates, plus a "speedups" number (their contribution value — higher is better). For each track I want the 49 players with the most speedups to get slots, and as many of them as possible to actually fit.
 
 This is basically a maximum weight bipartite matching problem — players on one side, slots on the other, edges where a player is available, and you want to maximize total weight (speedups) of the matched set. But with a twist: I care about maximizing the *count* of top-49 players first, then maximizing their speedups second.
 
@@ -68,4 +68,4 @@ Day 1's last slot (23:45) and Day 2's first slot (00:00) need to be the same per
 
 ## Performance
 
-It's 49 slots and ~80 players per day. The whole thing runs in under a second. The real bottleneck is Google Sheets API calls (reading/writing cells), not the algorithm.
+Each track is 49 slots matched against hundreds of sign-ups across the cycle. The whole thing runs in under a second. The real bottleneck is Google Sheets API calls (reading/writing cells), not the algorithm.
